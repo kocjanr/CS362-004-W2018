@@ -1267,20 +1267,21 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case embargo:
-    //+2 Coins
-    state->coins = state->coins + 2;
+  printf('hello');
+    // //+2 Coins
+    // state->coins = state->coins + 2;
 
-    //see if selected pile is in play
-    if (state->supplyCount[choice1] == -1)
-    {
-      return -1;
-    }
+    // //see if selected pile is in play
+    // if (state->supplyCount[choice1] == -1)
+    // {
+    //   return -1;
+    // }
 
-    //add embargo token to selected supply pile
-    state->embargoTokens[choice1]++;
+    // //add embargo token to selected supply pile
+    // state->embargoTokens[choice1]++;
 
-    //trash card
-    discardCard(handPos, currentPlayer, state, 1);
+    // //trash card
+    // discardCard(handPos, currentPlayer, state, 1);
     return 0;
 
   case outpost:
@@ -1524,7 +1525,8 @@ void embargo(int choice1, struct gameState *state, int handPos, int currentPlaye
 }
 
 void adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
-  int z;
+  int z =0 ;
+  int temphand;
    while (drawntreasure < 2)
     {
       if (state->deckCount[currentPlayer] < 1)
@@ -1532,7 +1534,7 @@ void adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
         shuffle(currentPlayer, state);
       }
       drawCard(currentPlayer, state);
-      cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1]; //top card of hand is most recently drawn card.
+      int cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1]; //top card of hand is most recently drawn card.
       if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
         drawntreasure++;
       else
