@@ -763,28 +763,31 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch (card)
   {
   case adventurer:
-    while (drawntreasure < 2)
-    {
-      if (state->deckCount[currentPlayer] < 1)
-      { //if the deck is empty we need to shuffle discard and add to deck
-        shuffle(currentPlayer, state);
-      }
-      drawCard(currentPlayer, state);
-      cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1]; //top card of hand is most recently drawn card.
-      if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
-        drawntreasure++;
-      else
-      {
-        temphand[z] = cardDrawn;
-        state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
-        z++;
-      }
-    }
-    while (z - 1 >= 0)
-    {
-      state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z - 1]; // discard all cards in play that have been drawn
-      z = z - 1;
-    }
+  Adventurer(state, currentPlayer,drawntreasure);
+
+    
+    // while (drawntreasure < 2)
+    // {
+    //   if (state->deckCount[currentPlayer] < 1)
+    //   { //if the deck is empty we need to shuffle discard and add to deck
+    //     shuffle(currentPlayer, state);
+    //   }
+    //   drawCard(currentPlayer, state);
+    //   cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer] - 1]; //top card of hand is most recently drawn card.
+    //   if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
+    //     drawntreasure++;
+    //   else
+    //   {
+    //     temphand[z] = cardDrawn;
+    //     state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
+    //     z++;
+    //   }
+    // }
+    // while (z - 1 >= 0)
+    // {
+    //   state->discard[currentPlayer][state->discardCount[currentPlayer]++] = temphand[z - 1]; // discard all cards in play that have been drawn
+    //   z = z - 1;
+    // }
     return 0;
 
   case council_room:
@@ -937,6 +940,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case smithy:
+
+  Smithy(currentPlayer, state,handPos);
     // //+3 Cards
     // for (i = 0; i < 3; i++)
     // {
@@ -948,14 +953,16 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case village:
-    //+1 Card
-    drawCard(currentPlayer, state);
 
-    //+2 Actions
-    state->numActions = state->numActions + 2;
+  Village(currentPlayer, state, handPos);
+    // //+1 Card
+    // drawCard(currentPlayer, state);
 
-    //discard played card from hand
-    discardCard(handPos, currentPlayer, state, 0);
+    // //+2 Actions
+    // state->numActions = state->numActions + 2;
+
+    // //discard played card from hand
+    // discardCard(handPos, currentPlayer, state, 0);
     return 0;
 
   case baron:
@@ -1082,26 +1089,28 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case steward:
-    if (choice1 == 1)
-    {
-      //+2 cards
-      drawCard(currentPlayer, state);
-      drawCard(currentPlayer, state);
-    }
-    else if (choice1 == 2)
-    {
-      //+2 coins
-      state->coins = state->coins + 2;
-    }
-    else
-    {
-      //trash 2 cards in hand
-      discardCard(choice2, currentPlayer, state, 1);
-      discardCard(choice3, currentPlayer, state, 1);
-    }
 
-    //discard card from hand
-    discardCard(handPos, currentPlayer, state, 0);
+    Steward(choice1, currentPlayer,state, handPos, choice2, choice3);
+    // if (choice1 == 1)
+    // {
+    //   //+2 cards
+    //   drawCard(currentPlayer, state);
+    //   drawCard(currentPlayer, state);
+    // }
+    // else if (choice1 == 2)
+    // {
+    //   //+2 coins
+    //   state->coins = state->coins + 2;
+    // }
+    // else
+    // {
+    //   //trash 2 cards in hand
+    //   discardCard(choice2, currentPlayer, state, 1);
+    //   discardCard(choice3, currentPlayer, state, 1);
+    // }
+
+    // //discard card from hand
+    // discardCard(handPos, currentPlayer, state, 0);
     return 0;
 
   case tribute:
@@ -1267,7 +1276,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case embargo:
-  printf('hello');
+    Embargo(choice1, state, handPos, currentPlayer);
     // //+2 Coins
     // state->coins = state->coins + 2;
 
@@ -1462,7 +1471,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
 
 /////////////////////////////////////////////////
 // Refactoring switch statements to functions
-void smithy(int currentPlayer, struct gameState *state, int handPos){
+void Smithy(int currentPlayer, struct gameState *state, int handPos){
      //+3 Cards
     for (int i = 0; i < 3; i++)
     {
@@ -1473,7 +1482,7 @@ void smithy(int currentPlayer, struct gameState *state, int handPos){
     discardCard(handPos, currentPlayer, state, 0);
 }
 
-void village(int currentPlayer, struct gameState *state, int handPos){
+void Village(int currentPlayer, struct gameState *state, int handPos){
     //+1 Card
     drawCard(currentPlayer, state);
 
@@ -1484,7 +1493,7 @@ void village(int currentPlayer, struct gameState *state, int handPos){
     discardCard(handPos, currentPlayer, state, 0);    
 }
 
-void steward(int choice1, int currentPlayer, struct gameState *state, int handPos, int choice, int choice2, int choice3){
+void Steward(int choice1, int currentPlayer, struct gameState *state, int handPos, int choice2, int choice3){
     if (choice1 == 1)
     {
       //+2 cards
@@ -1507,7 +1516,7 @@ void steward(int choice1, int currentPlayer, struct gameState *state, int handPo
     discardCard(handPos, currentPlayer, state, 0);
 }
 
-void embargo(int choice1, struct gameState *state, int handPos, int currentPlayer, struct gameState *state){
+void Embargo(int choice1, struct gameState *state, int handPos, int currentPlayer){
     //+2 Coins
     state->coins = state->coins + 2;
 
@@ -1524,8 +1533,7 @@ void embargo(int choice1, struct gameState *state, int handPos, int currentPlaye
     discardCard(handPos, currentPlayer, state, 1);
 }
 
-void adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
-  int z =0 ;
+void Adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
   int temphand;
    while (drawntreasure < 2)
     {
