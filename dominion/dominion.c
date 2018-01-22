@@ -1491,7 +1491,7 @@ void Steward(int choice1, int currentPlayer, struct gameState *state, int handPo
     else if (choice1 == 2)
     {
       //+2 coins
-      state->coins = state->coins + 2;
+      state->coins = state->coins + 4;
     }
     else
     {
@@ -1509,7 +1509,7 @@ void Outpost(struct gameState *state, int handPos, int currentPlayer){
     state->outpostPlayed++;
 
     //discard card
-    discardCard(handPos, currentPlayer, state, 0);
+    discardCard(handPos, currentPlayer, state, 1);
 }
 
 void Adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
