@@ -1276,29 +1276,17 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
     return 0;
 
   case embargo:
-    Embargo(choice1, state, handPos, currentPlayer);
-    // //+2 Coins
-    // state->coins = state->coins + 2;
-
-    // //see if selected pile is in play
-    // if (state->supplyCount[choice1] == -1)
-    // {
-    //   return -1;
-    // }
-
-    // //add embargo token to selected supply pile
-    // state->embargoTokens[choice1]++;
-
-    // //trash card
-    // discardCard(handPos, currentPlayer, state, 1);
+    
     return 0;
 
   case outpost:
-    //set outpost flag
-    state->outpostPlayed++;
 
-    //discard card
-    discardCard(handPos, currentPlayer, state, 0);
+  Outpost(state, handPos, currentPlayer);
+    // //set outpost flag
+    // state->outpostPlayed++;
+
+    // //discard card
+    // discardCard(handPos, currentPlayer, state, 0);
     return 0;
 
   case salvager:
@@ -1516,25 +1504,17 @@ void Steward(int choice1, int currentPlayer, struct gameState *state, int handPo
     discardCard(handPos, currentPlayer, state, 0);
 }
 
-void Embargo(int choice1, struct gameState *state, int handPos, int currentPlayer){
-    //+2 Coins
-    state->coins = state->coins + 2;
+void Outpost(struct gameState *state, int handPos, int currentPlayer){
+  //set outpost flag
+    state->outpostPlayed++;
 
-    //see if selected pile is in play
-    if (state->supplyCount[choice1] == -1)
-    {
-      return -1;
-    }
-
-    //add embargo token to selected supply pile
-    state->embargoTokens[choice1]++;
-
-    //trash card
-    discardCard(handPos, currentPlayer, state, 1);
+    //discard card
+    discardCard(handPos, currentPlayer, state, 0);
 }
 
 void Adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
-  int temphand;
+  int temphand[MAX_HAND];
+  int z = 0;
    while (drawntreasure < 2)
     {
       if (state->deckCount[currentPlayer] < 1)
