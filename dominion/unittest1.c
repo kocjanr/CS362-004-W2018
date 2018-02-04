@@ -1,9 +1,9 @@
 #include "dominion.h"
+#include <assert.h>
 
-int testCompare(){
-    int *a, *b;
-    for(int i=0; i < 100; i++)
-    {
-        compare(a,b);
-    }
+int testCompareFunctionWhenNumbersAreLessThan(){
+    int *a = (int*)10;
+    int *b = (int*)20;
+
+    assert(compare(a,b) == -1);
 }
