@@ -4,6 +4,7 @@
 void SmithyReturnsWithTrue(){
     struct gameState *mockState = gameState();
     int x = initializeGame(2,(int*)2,10,mockState);
-    //int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
+    int y = cardEffect(1,1,1,1,mockState,1,(int*)1);
+    assert(y == 0);
     
 }
