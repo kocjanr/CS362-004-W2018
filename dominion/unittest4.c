@@ -1,7 +1,11 @@
 #include "dominion.h"
 
-void cardPlayedIsValid(){
+void gameSetUpIsValid(){
     struct gameState *mockState = gameState();
-    mockState->numPlayers = 2;
-
+    int x = initializeGame(1,(int*)1,10,mockState);
+    if(assert( x == 0) == 1){
+        printf("Game set up correctly");
+    }else{
+        printf("Game not set up correctly");
+    }
 }

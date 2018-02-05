@@ -1479,6 +1479,7 @@ void Village(int currentPlayer, struct gameState *state, int handPos){
 
     //discard played card from hand
     discardCard(handPos, currentPlayer, state, 0);    
+
 }
 
 void Steward(int choice1, int currentPlayer, struct gameState *state, int handPos, int choice2, int choice3){
@@ -1510,6 +1511,7 @@ void Outpost(struct gameState *state, int handPos, int currentPlayer){
 
     //discard card
     discardCard(handPos, currentPlayer, state, 1);
+
 }
 
 void Adventurer(struct gameState *state, int currentPlayer, int drawntreasure){
