@@ -16,9 +16,6 @@ int main () {
 	       remodel, smithy, village, baron, great_hall};
   struct gameState *state = newGame();
 
-SelectStream(2);
-PutSeed(3);
-
   	for(int i =0; i <100000; i++){
 		int x = initializeGame(4,k,1,state);
         int p = floor(Random() * 2);
@@ -26,9 +23,8 @@ PutSeed(3);
         state->discardCount[p] = floor(Random() * MAX_DECK);
         state->handCount[p] = floor(Random() * MAX_HAND);
 
-        for(int j=0; j<50;j++){
-            minionFunc(state,j,j,1,3);
-            //void minionFunc(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2);
+        for(int j=0; j<5;j++){
+            Smithy(j,state,2);
         }
     }
 

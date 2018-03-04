@@ -4,25 +4,27 @@
 #include <stdio.h>
 #include <assert.h>
 #include "rngs.h"
-#include <math.h>
 
 #define DEBUG 0
 #define NOISY_TEST 1
 
-
 int main () {
+
+  int r;
 
   int k[10] = {adventurer, council_room, feast, gardens, mine,
 	       remodel, smithy, village, baron, great_hall};
 
-  struct gameState *state = newGame();int x = initializeGame(2,k,1,state);
-    int p = floor(Random() * 2);
-    state->deckCount[p] = floor(2* MAX_DECK);
-    state->discardCount[p] = floor(2 * MAX_DECK);
-    state->handCount[p] = floor(2 * MAX_HAND);
+  struct gameState G;
+  
+  r = initializeGame(4, k, 1, &G);
 
-   mineFunc(state,2,1,1,6);
+  printf ("initializeGame(4, k, 1, &G) = %d\n", r);
+  assert(r == 0);
 
-
+  r = supplyCount(adventurer, &G);
+  printf ("supplyCount(adventurer, &G) = %d\n", r);
+  assert(r == 10);
+  
   return 0;
 }

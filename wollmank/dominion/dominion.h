@@ -128,10 +128,14 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
 
-void minionFunc(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2);
-void mineFunc(struct gameState *state, int currentPlayer, int choice1, int choice2, int handPos);
-void council_roomFunc(int currentPlayer, struct gameState *state, int handPos);
-void smithyFunc(int currentPlayer, int handPos, struct gameState *state);
-void adventurerFunc(int drawntreasure, int currentPlayer, int z, int temphand[], struct gameState *state);
+void Smithy(int currentPlayer, struct gameState *state, int handPos);
+
+void Village(int currentPlayer, struct gameState *state, int handPos);
+
+void Steward(int choice1, int currentPlayer, struct gameState *state, int handPos, int choice2, int choice3);
+
+void Outpost(struct gameState *state, int handPos, int currentPlayer);
+
+void Adventurer(struct gameState *state, int currentPlayer, int drawntreasure);
 
 #endif

@@ -1,9 +1,28 @@
 #include "dominion.h"
-//742
+#include "dominion_helpers.h"
+#include <string.h>
+#include <stdio.h>
+#include <assert.h>
+#include "rngs.h"
+#include <math.h>
 
-void AdventurerReturnsWithTrue(){
-    struct gameState *mockState = gameState();
-    int x = initializeGame(2,(int*)2,10,mockState);
-    int y = cardEffect(1,1,1,1,mockState,1,(int*)1);
-    assert(y == 0);
+#define DEBUG 0
+#define NOISY_TEST 1
+
+
+int main () {
+
+  int k[10] = {adventurer, council_room, feast, gardens, mine,
+	       remodel, smithy, village, baron, great_hall};
+
+  struct gameState *state = newGame();int x = initializeGame(2,k,1,state);
+    int p = floor(Random() * 2);
+    state->deckCount[p] = floor(2* MAX_DECK);
+    state->discardCount[p] = floor(2 * MAX_DECK);
+    state->handCount[p] = floor(2 * MAX_HAND);
+
+  adventurerFunc(1,2,3,k,state);
+
+
+  return 0;
 }

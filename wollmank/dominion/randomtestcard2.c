@@ -25,9 +25,7 @@ int main () {
         state->deckCount[p] = floor(j* MAX_DECK);
         state->discardCount[p] = floor(j * MAX_DECK);
         state->handCount[p] = floor(j * MAX_HAND);
-        // Outpost(state,9,j);
-        // void mineFunc(struct gameState *state, int currentPlayer, int choice1, int choice2, int handPos);
-        mineFunc(state,j,i,i,j);
+        Outpost(state,9,j);
         }
     }
 
